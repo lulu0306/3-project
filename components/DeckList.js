@@ -1,10 +1,35 @@
 import React from 'react'
-import {View,Text, TouchableOpacity, StyleSheet } from 'react-native'
+import {View,Text, TouchableOpacity, StyleSheet , ScrollView } from 'react-native'
 import {connect} from 'react-redux'
 import {receiveCards} from '../Actions/index'
-import { white } from '../utils/colors';
-import { fetchCardsResults } from '../utils/api'
+import { white, blue, gray  } from '../utils/colors';
+import { testFetchCards, clearAll } from '../utils/api';
+import { fetchCardsResults } from '../utils/api';
 import { AppLoading } from 'expo';
+import { getLocalNotification } from '../utils/helpers';
+
+
+function ShowBtn ({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={{alignItems: 'center'}}
+            onPress={onPress}
+        >
+            <Text style={styles.addCardBtnText}>Show</Text>
+        </TouchableOpacity>
+    )
+}
+
+function ClearBtn ({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={{alignItems: 'center'}}
+            onPress={onPress}
+        >
+            <Text style={styles.addCardBtnText}>Clear</Text>
+        </TouchableOpacity>
+    )
+}
 
 
 class DeckList extends React.Component{
@@ -21,6 +46,24 @@ class DeckList extends React.Component{
             .then(() => this.setState(() => ({load: true})));
     }
 
+
+    show = () => {
+        const { cards } = this.props;
+        testFetchCards()
+            .then((result) => {
+                console.log(`Show:AsyncStorage ###: ${result}`)
+            });
+        
+        console.log('Show: redux state ###:', cards);
+        getLocalNotification();
+        
+    }
+    clear = () => {
+        clearAll()
+            .then((result) => {
+                console.log(`Clear:AsyncStorage ###: ${result}`)
+            });
+    }
     render(){
         const { cards } = this.props
         const { load } = this.state
@@ -28,18 +71,40 @@ class DeckList extends React.Component{
             return <AppLoading />
         }
         return(
-            <View>
-                <Text>Deck List</Text>
-                <Text>{ JSON.stringify(cards) }</Text>
-            </View>
+            <ScrollView>
+                { Object.keys(cards).map((key) => {
+	                    const num = cards[key].questions.length;
+                    return (
+                    <TouchableOpacity
+                        key={key}
+                        style={styles.item}
+                        onPress={() => this.props.navigation.navigate(
+                            'Deck',
+                            { deckId: key }        
+                        )}>
+                        <Text style={styles.itemText}>{ key }</Text>
+                        <Text style={[styles.itemText, {color: gray, fontSize: 20}]}>
+                            { ( num <= 1 ) ? `${num} Card` : `${num} Cards` }
+                        </Text>
+                    </TouchableOpacity>
+                )})}
+                 <View>
+                    <Text style={{color:white}}>.</Text>
+                </View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 10,
+        margin: 10,
+    },
     item: {
         backgroundColor: white,
-        borderRadius: 2,
+        borderRadius: 5,
         padding: 20,
         marginLeft: 10,
         marginRight: 20,
@@ -47,12 +112,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowRadius: 3,
         shadowOpacity: 0.8,
-        shadowColor: 'rgba(0,0,0,0.24)',
+        shadowColor: gray,
         shadowOffset: {
             width: 0,
             height: 3,
-        }
+        },
+        elevation: 6,
     },
+    itemText: {
+        fontSize: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center'
+    }
 })
 
 
