@@ -1,6 +1,6 @@
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
-export const DELETE_DECK = 'DELETE_DECK'
+export const REMOVE_DECK = 'REMOVE_DECK'
 export const RECEIVE_CARDS = 'RECEIVE_CARDS'
 
 
@@ -26,9 +26,9 @@ export function addCard(title,newCards){
     }
 }
 
-export function deleteDeck(title){
+export function removeDeck(title){
     return{
-        type:DELETE_DECK,
+        type:REMOVE_DECK,
         title
     }
 }

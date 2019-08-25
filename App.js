@@ -4,8 +4,8 @@ import Deck from './components/Deck'
 import reducer from './reducers/index'
 import Constants from 'expo-constants';
 import DeckList from './components/DeckList'
-import AddDeck from './components/newDeck'
-import AddCard from './components/NewCard';
+import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard';
 import { createStore } from 'redux';
 import { setLocalNotification } from './utils/helpers';
 import { Provider } from 'react-redux';
@@ -71,7 +71,7 @@ const Tabs = createMaterialTopTabNavigator({
 const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
-    navigationOptions: {
+     navigationOptions: {
       header: null,
     }
   },

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
-import { white, blue, gray} from '../utils/colors';
+import { white, blue, gray,skyBlue} from '../utils/colors';
 import { connect } from 'react-redux';
-import { addDeck } from '../Actions';
+import { addDeck } from '../Actions/index';
 import { submitDeck} from '../utils/api';
 import FlashMessage, { showMessage } from "react-native-flash-message";
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { white, blue, gray} from '../utils/colors';
 import { connect } from 'react-redux';
-import { addCard } from '../Actions';
+import { addCard } from '../Actions/index';
 import { submitCard } from '../utils/api';
 import FlashMessage, { showMessage } from "react-native-flash-message";
 

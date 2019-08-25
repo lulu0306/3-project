@@ -8,10 +8,10 @@ import {white,blue,gray} from '../utils/colors'
 function CorrectBtn({onPress}){
     return(
     <TouchableOpacity
-    style={StyleSheet.CorrectBtn}
+    style={StyleSheet.correctBtn}
     onPress={onPress}
     >
-       <Text style={style={CorrectBtnText}}>Correct!</Text> 
+       <Text style={style={correctBtnText}}>Correct!</Text> 
     </TouchableOpacity>
     )
 }
@@ -19,10 +19,10 @@ function CorrectBtn({onPress}){
 function IncorrectBtn({onPress}){
     return(
         <TouchableOpacity
-        style={StyleSheet.IncorrectBtn}
+        style={StyleSheet.incorrectBtn}
         onPress={onPress}
         >
-            <Text style={StyleSheet.IncorrectBtn}>Incorrect</Text>
+            <Text style={StyleSheet.incorrectBtnText}>Incorrect</Text>
         </TouchableOpacity>
     )
 }

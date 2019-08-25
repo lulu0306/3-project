@@ -3,7 +3,7 @@ import {Text,View,TouchableOpacity,StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 import {white,blue,gray} from '../utils/colors'
 import Button from './Button'
-import { deleteDeck} from '../Actions';
+import { removeDeck} from '../Actions/index';
 import { removeDeckAsyncStorage } from '../utils/api'; 
 
 
@@ -41,7 +41,7 @@ class Deck extends React.Component{
     start = () => {
         const { deckId, deckCards } = this.props;
         (deckCards.questions.length === 0)
-            ? this.props.navigation.navigate('NoCard')
+            ? this.props.navigation.navigate('Empty')
             : this.props.navigation.navigate(
             'Card',
             { deckId: deckId, index: 0, correct: 0}        
@@ -54,12 +54,12 @@ class Deck extends React.Component{
             { deckId: deckId }        
         )    
     }
-    deleteDeck = () => {
+    removeDeck = () => {
         const { deckId, } = this.props;
         // navigate to Home
         this.props.navigation.navigate('DeckList');
         // Remove Deck from Redux Store
-        this.props.dispatch(deleteDeck(deckId));
+        this.props.dispatch(removeDeck(deckId));
         // Remove Deck from Async DB
         removeDeckAsyncStorage(deckId);
 
@@ -78,7 +78,7 @@ class Deck extends React.Component{
               <View style={{height: 30}}/>
               <AddBtn onPress={this.add} />
               <StartBtn onPress={this.start}/>
-              <Button onPress={this.deleteDeck} style={{margin: 20}}>
+              <Button onPress={this.removeDeck} style={{margin: 20}}>
                   Remove Deck
               </Button>
          </View>

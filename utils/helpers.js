@@ -21,6 +21,22 @@ export function clearLocalNotification() {
         .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
+
+export function createNotification() {
+    return {
+        title: 'try questions!',
+        body: "👋 don't forget to answer questions for today!",
+        ios: {
+            sound: true,
+        },
+        android: {
+            sound: true,
+            priority: 'high',
+            sticky: false,
+            vibrate: true,
+        }
+    }
+}
 export function setLocalNotification() {
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then(JSON.parse)

@@ -9,27 +9,27 @@ import { AppLoading } from 'expo';
 import { getLocalNotification } from '../utils/helpers';
 
 
-function ShowBtn ({ onPress }) {
-    return (
-        <TouchableOpacity
-            style={{alignItems: 'center'}}
-            onPress={onPress}
-        >
-            <Text style={styles.addCardBtnText}>Show</Text>
-        </TouchableOpacity>
-    )
-}
+// function ShowBtn ({ onPress }) {
+//     return (
+//         <TouchableOpacity
+//             style={{alignItems: 'center'}}
+//             onPress={onPress}
+//         >
+//             <Text style={styles.addCardBtnText}>Show</Text>
+//         </TouchableOpacity>
+//     )
+// }
 
-function ClearBtn ({ onPress }) {
-    return (
-        <TouchableOpacity
-            style={{alignItems: 'center'}}
-            onPress={onPress}
-        >
-            <Text style={styles.addCardBtnText}>Clear</Text>
-        </TouchableOpacity>
-    )
-}
+// function ClearBtn ({ onPress }) {
+//     return (
+//         <TouchableOpacity
+//             style={{alignItems: 'center'}}
+//             onPress={onPress}
+//         >
+//             <Text style={styles.addCardBtnText}>Clear</Text>
+//         </TouchableOpacity>
+//     )
+// }
 
 
 class DeckList extends React.Component{
