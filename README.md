@@ -1,6 +1,6 @@
 # Udacity MobileCards
 
-**this Project was build with React Native and Redux , the main goal is to build a Mobile App
+**this Project was build with React Native and Redux , the main goal is to build a Mobile App**
 **for creating Cards to make quizes for people .
 **To download the project: 
 **1. Download the zip that contains all of the files for running the prject 
