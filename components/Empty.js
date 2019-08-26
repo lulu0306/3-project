@@ -5,7 +5,7 @@ import { white, blue, gray } from '../utils/colors';
 export default function NoCard () {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Sorry, there is no card in the deck..</Text>
+            <Text style={styles.text}>Empty.</Text>
         </View>
     )
 }

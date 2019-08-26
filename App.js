@@ -10,7 +10,7 @@ import { createStore } from 'redux';
 import { setLocalNotification } from './utils/helpers';
 import { Provider } from 'react-redux';
  import {MaterialIcons} from '@expo/vector-icons'
-import { purple, blue, white, } from './utils/colors';
+import { purple, blue, white,pink } from './utils/colors';
 import {
   createMaterialTopTabNavigator,
   createAppContainer,
@@ -81,7 +81,9 @@ const MainNavigator = createStackNavigator({
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue,
-      },
+      }
+       })
+  },      
       Card: {
         screen: Card,
         navigationOptions: ({ navigation }) => ({
@@ -118,8 +120,6 @@ const MainNavigator = createStackNavigator({
           }
         })
       },
-    })
-  },
 })
 
 const AppContainer = createAppContainer(MainNavigator);
@@ -132,7 +132,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
-          <UdaciStatusBar backgroundColor={purple} barStyle='light-content' />
+          <UdaciStatusBar backgroundColor={pink} barStyle='light-content' />
         <AppContainer/>
         </View>
       </Provider>

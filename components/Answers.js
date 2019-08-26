@@ -1,18 +1,18 @@
 import React from 'react'
 import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { white, purple, blue, gray } from '../utils/colors';
+import { white, purple, blue, gray,pink } from '../utils/colors';
 import { MaterialIcons } from '@expo/vector-icons';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 
-function HomeBtn ({ onPress }) {
+function GoToDeckBtn ({ onPress }) {
     return (
         <TouchableOpacity
-            style={styles.homeBtn}
+            style={styles.goToDeckBtn}
             onPress={onPress}
         >
-            <MaterialIcons name='keyboard-return' size={24} color={blue} />
+            <MaterialIcons name='keyboard-return' size={24} color={white} />
             <Text style={styles.goToDeckBtnText}> Go To Deck</Text>
         </TouchableOpacity>
     )
@@ -55,20 +55,23 @@ class Answers extends React.Component{
         const { deckId, correct, deckCards } = this.props;
         const percentage = ((correct / deckCards.questions.length) * 100 ).toFixed(1);
         return(
-            <View  style={styles.container}>
-                <Text style={styles.resultText}>You have answered</Text>
-                <Animated.Text style={[
-                    styles.percentText,
-                    {transform: [{scale: bounceValue}]}]}>
-                    {`${percentage} %`}
-                </Animated.Text>
-                <Text style={styles.resultText}>correctly.</Text>
-                <HomeBtn onPress={() => {this.props.navigation.navigate('Deck', { deckId: deckId })}} />
-                <RetryBtn onPress={() => {this.props.navigation.navigate(
-                    'Card',
-                    { deckId: deckId, index: 0, correct: 0} 
-                )}} />
-            </View>
+            <View style={styles.container}> 
+            <Text style={styles.resultText}>You have answered</Text>
+            <Animated.Text style={[
+                styles.percentText,
+                {transform: [{scale: bounceValue}]}]}>
+                {`${percentage} %`}
+            </Animated.Text>
+            <Text style={styles.resultText}>correctly.</Text>
+            <GoToDeckBtn onPress={() => {this.props.navigation.navigate(
+                'Deck',
+                { deckId: deckId }
+            )}} />
+            <RetryBtn onPress={() => {this.props.navigation.navigate(
+                'Card',
+                { deckId: deckId, index: 0, correct: 0} 
+            )}} />
+        </View>
         )
     }
 }
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
     percentText: {
         fontSize: 70,
         fontStyle: 'italic',
-        color:purple,
+        color:pink,
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
@@ -97,8 +100,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 5
     },
-    homeBtn: {
-        backgroundColor: white,
+    goToDeckBtn: {
+        flexDirection: 'row',
+        backgroundColor: blue,
         borderColor: blue,
         borderWidth: 0.5,
         margin: 10,
@@ -115,8 +119,6 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 20,
         textAlign: 'center',
-        // margin:10,
-        // padding:10,
     },
     retryBtn: {
         flexDirection: 'row',
@@ -137,8 +139,6 @@ const styles = StyleSheet.create({
         color: blue,
         fontSize: 20,
         textAlign: 'center',
-        // margin:10,
-        // padding:10,
     },
 })
 

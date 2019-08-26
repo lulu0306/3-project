@@ -5,36 +5,35 @@ import Button from './Button'
 import {white,blue,gray} from '../utils/colors'
 
 
-function CorrectBtn({onPress}){
-    return(
-    <TouchableOpacity
-    style={StyleSheet.correctBtn}
-    onPress={onPress}
-    >
-       <Text style={style={correctBtnText}}>Correct!</Text> 
-    </TouchableOpacity>
+
+function CorrectBtn ({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={styles.correctBtn}
+            onPress={onPress}
+        >
+            <Text style={styles.correctBtnText}>Correct!</Text>
+        </TouchableOpacity>
     )
 }
-
-function IncorrectBtn({onPress}){
-    return(
+function IncorrectBtn ({ onPress }) {
+    return (
         <TouchableOpacity
-        style={StyleSheet.incorrectBtn}
-        onPress={onPress}
+            style={styles.incorrectBtn}
+            onPress={onPress}
         >
-            <Text style={StyleSheet.incorrectBtnText}>Incorrect</Text>
+            <Text style={styles.incorrectBtnText}>Incorrect</Text>
         </TouchableOpacity>
     )
 }
 
-class Card extends React.Component{
-    state={
-        showAnswer: false
+class Card extends React.Component {
+    state = {
+        showAnswer: false,
     }
-
-    static navigationOptions = ({navigation}) => {
-        const {deckId} = navigation.state.params;
-        return{
+    static navigationOptions = ({ navigation }) => {
+        const { deckId } = navigation.state.params;
+        return {
             title: `Quiz for ${deckId}`,
         }
     }
@@ -47,7 +46,7 @@ class Card extends React.Component{
         const { deckId, pos, num } = this.props;
         (pos === num)
             ? this.props.navigation.navigate(
-                'Result',
+                'Answers',
                 { deckId: deckId, correct: correct })
             : this.props.navigation.navigate(
                 'Card',
@@ -60,13 +59,13 @@ class Card extends React.Component{
     incorrectAnswer = () => {
         this.nextQuestion(this.props.correct)
     }
-    render(){
+    render() {
         const {deckId, pos, num, quiz, } = this.props;
-        return(
+        return (
             <View style={styles.container}>
-                  <Text style={styles.progressText}>{`${pos} of ${num}`}</Text>
-                  <Text style={styles.questionText}>
-                  {(this.state.showAnswer)
+                <Text style={styles.progressText}>{`${pos} of ${num}`}</Text>
+                <Text style={styles.questionText}>
+                    {(this.state.showAnswer)
                         ? quiz.answer
                         : quiz.question}
                 </Text>
@@ -81,7 +80,6 @@ class Card extends React.Component{
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -148,7 +146,7 @@ function mapStateToProps (state, { navigation }) {
     const pos = index + 1;
     const num = state[deckId].questions.length;
 
-     return {
+    return {
         deckId,
         pos,
         num,
@@ -156,6 +154,5 @@ function mapStateToProps (state, { navigation }) {
         quiz: state[deckId].questions[index],
     }
 }
-
 
 export default connect(mapStateToProps)(Card);
